@@ -10,11 +10,11 @@ import (
 )
 
 func GetSefazConfig(xml string) (envelop string) {
-	var rxml = strings.ReplaceAll(xml, "&", "&amp;")
-	rxml = strings.ReplaceAll(rxml, "<", "&lt;")
-	rxml = strings.ReplaceAll(rxml, ">", "&gt;")
-	rxml = strings.ReplaceAll(rxml, "'", "&apos;")
-	rxml = strings.ReplaceAll(rxml, `"`, "&quot;")
+	// var rxml = strings.ReplaceAll(xml, "&", "&amp;")
+	// rxml = strings.ReplaceAll(rxml, "<", "&lt;")
+	// rxml = strings.ReplaceAll(rxml, ">", "&gt;")
+	// rxml = strings.ReplaceAll(rxml, "'", "&apos;")
+	// rxml = strings.ReplaceAll(rxml, `"`, "&quot;")
 
 	envelop = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
     xmlns:sped="http://sped.fazenda.gov.br/">
@@ -23,7 +23,7 @@ func GetSefazConfig(xml string) (envelop string) {
         <sped:ReceberLoteEventos>
             <sped:loteEventos>
                 <Reinf xmlns="http://www.reinf.esocial.gov.br/schemas/envioLoteEventos/v1_05_01">
-                    <loteEventos>` + rxml + `</loteEventos>
+                    <loteEventos>` + xml + `</loteEventos>
                 </Reinf>
             </sped:loteEventos>
         </sped:ReceberLoteEventos>
