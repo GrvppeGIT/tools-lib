@@ -74,19 +74,14 @@ func GetSefazConfig(xml string) (envelop string) {
 	// rxml = strings.ReplaceAll(rxml, "'", "&apos;")
 	// rxml = strings.ReplaceAll(rxml, `"`, "&quot;")
 
-	envelop = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-    xmlns:sped="http://sped.fazenda.gov.br/">
-    <soapenv:Header />
-    <soapenv:Body>
-        <sped:ReceberLoteEventos>
-            <sped:loteEventos>
-                <Reinf xmlns="http://www.reinf.esocial.gov.br/schemas/envioLoteEventosAssincrono/v1_05_01">
+	envelop = `<Reinf xmlns="http://www.reinf.esocial.gov.br/schemas/envioLoteEventosAssincrono/v1_00_00">
                     <loteEventos>` + xml + `</loteEventos>
-                </Reinf>
-            </sped:loteEventos>
-        </sped:ReceberLoteEventos>
-    </soapenv:Body>
-</soapenv:Envelope>`
+                </Reinf>`
+
+	fmt.Println("xml envelop ==================")
+	fmt.Println(envelop)
+	fmt.Println("==================")
+
 	return envelop
 }
 
