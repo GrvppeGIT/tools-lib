@@ -80,7 +80,7 @@ func GetSefazConfig(xml string) (envelop string) {
     <soapenv:Body>
         <sped:ReceberLoteEventos>
             <sped:loteEventos>
-                <Reinf xmlns="http://www.reinf.esocial.gov.br/schemas/envioLoteEventosAssincrono/v1_00_00">
+                <Reinf xmlns="http://www.reinf.esocial.gov.br/schemas/envioLoteEventosAssincrono/v1_05_01">
                     <loteEventos>` + xml + `</loteEventos>
                 </Reinf>
             </sped:loteEventos>
@@ -113,6 +113,10 @@ func SoapCall(cert tls.Certificate, baseURL, xml string) string {
 		fmt.Println(err)
 	}
 	defer response.Body.Close()
+
+	fmt.Println("==================")
+	fmt.Println(response.StatusCode)
+	fmt.Println("==================")
 
 	content, _ := io.ReadAll(response.Body)
 
