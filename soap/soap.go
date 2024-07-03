@@ -67,16 +67,23 @@ func SoapCallSync(cert tls.Certificate, baseURL, xml, soapAction string) string 
 	return s
 }
 
-func GetSefazConfig(xml string) (envelop string) {
+func GetSefazConfig(xml, tpInsc, nrInsc string) (envelop string) {
 	// var rxml = strings.ReplaceAll(xml, "&", "&amp;")
 	// rxml = strings.ReplaceAll(rxml, "<", "&lt;")
 	// rxml = strings.ReplaceAll(rxml, ">", "&gt;")
 	// rxml = strings.ReplaceAll(rxml, "'", "&apos;")
 	// rxml = strings.ReplaceAll(rxml, `"`, "&quot;")
 
-	envelop = `<Reinf xmlns="http://www.reinf.esocial.gov.br/schemas/envioLoteEventosAssincrono/v1_00_00">
-                    <loteEventos>` + xml + `</loteEventos>
-                </Reinf>`
+	envelop = `<?xml version="1.0" encoding="utf-8"?>
+<Reinf xmlns="http://www.reinf.esocial.gov.br/schemas/envioLoteEventosAssincrono/v1_00_00">
+  <envioLoteEventos>
+    <ideContribuinte>
+      <tpInsc>` + tpInsc + `</tpInsc>
+      <nrInsc>` + nrInsc + `</nrInsc>
+    </ideContribuinte>
+    <eventos>` + xml + `</eventos>
+  </envioLoteEventos>
+</Reinf>`
 
 	fmt.Println("xml envelop ==================")
 	fmt.Println(envelop)
