@@ -114,7 +114,7 @@ func (s *signer) CreateSignature(data interface{}) (*Signature, error) {
 	signature.SignedInfo.SignatureMethod.Algorithm = s.sigAlg.name
 	signature.SignedInfo.Reference.DigestMethod.Algorithm = s.digestAlg.name
 	// canonicalize the Item
-	canonData, id, err := canonicalize(data)
+	canonData, _, err := canonicalize(data)
 	if err != nil {
 		return nil, err
 	}
