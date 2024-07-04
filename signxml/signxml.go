@@ -114,14 +114,13 @@ func (s *signer) CreateSignature(data interface{}) (*Signature, error) {
 	signature.SignedInfo.SignatureMethod.Algorithm = s.sigAlg.name
 	signature.SignedInfo.Reference.DigestMethod.Algorithm = s.digestAlg.name
 	// canonicalize the Item
-	canonData, _, err := canonicalize(data)
+	canonData, id, err := canonicalize(data)
 	if err != nil {
 		return nil, err
 	}
-	// if id != "" {
-	signature.SignedInfo.Reference.URI = ""
-	// signature.SignedInfo.Reference.URI = "#" + id
-	// }
+	if id != "" {
+		signature.SignedInfo.Reference.URI = "#" + id
+	}
 	// calculate the digest
 	digest := s.digest(canonData)
 	signature.SignedInfo.Reference.DigestValue = digest
