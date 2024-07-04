@@ -118,9 +118,10 @@ func (s *signer) CreateSignature(data interface{}) (*Signature, error) {
 	if err != nil {
 		return nil, err
 	}
-	if id != "" {
-		signature.SignedInfo.Reference.URI = "#" + id
-	}
+	// if id != "" {
+	signature.SignedInfo.Reference.URI = ""
+	// signature.SignedInfo.Reference.URI = "#" + id
+	// }
 	// calculate the digest
 	digest := s.digest(canonData)
 	signature.SignedInfo.Reference.DigestValue = digest
