@@ -62,14 +62,17 @@ type StatusReturn struct {
 	Protocol string `json:"protocol"`
 }
 
-func LoadXML(xml string) (*Reinf, error) {
-	var returnReinf Reinf
+func NewReinfReturn() *Reinf {
+	return &Reinf{}
+}
+
+func (returnReinf *Reinf) LoadXML(xml string) (*Reinf, error) {
 
 	if err := json.Unmarshal([]byte(xml), &returnReinf); err != nil {
 		return nil, errors.New("não foi possível converter o xml RetornoLoteEventosAssincrono para struct")
 	}
 
-	return &returnReinf, nil
+	return returnReinf, nil
 }
 
 func (r *Reinf) GetStatus() StatusReturn {

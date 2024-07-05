@@ -3,7 +3,6 @@ package signxml
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
 	"os"
@@ -18,8 +17,6 @@ func SignXml(cnpj, xml, signLocation, action string) (string, error) {
 		"action":       action,
 		"reference":    true,
 	})
-
-	fmt.Println(string(postBody))
 
 	body := bytes.NewBuffer(postBody)
 
