@@ -1,4 +1,4 @@
-package soap
+package sendxml
 
 import (
 	"bytes"
