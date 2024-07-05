@@ -92,7 +92,7 @@ func GetSefazConfig(xml, tpInsc, nrInsc string) (envelop string) {
 	return envelop
 }
 
-func SoapCall(cert tls.Certificate, baseURL, xml string) string {
+func SoapCall(cert tls.Certificate, baseURL, xml string) (string, int, error) {
 
 	body := string(xml)
 
@@ -112,17 +112,18 @@ func SoapCall(cert tls.Certificate, baseURL, xml string) string {
 	response, err := client.Do(req)
 
 	if err != nil {
-		fmt.Println(err)
+		return "", 0, err
 	}
+
 	defer response.Body.Close()
 
-	fmt.Println("==================")
-	fmt.Println(response.StatusCode)
-	fmt.Println("==================")
+	content, err := io.ReadAll(response.Body)
 
-	content, _ := io.ReadAll(response.Body)
+	if err != nil {
+		return "", 0, err
+	}
 
-	s := strings.TrimSpace(string(content))
+	xmlReturn := strings.TrimSpace(string(content))
 
-	return s
+	return xmlReturn, response.StatusCode, nil
 }
