@@ -1,7 +1,6 @@
 package returnreinf
 
 import (
-	"encoding/json"
 	"encoding/xml"
 	"errors"
 )
@@ -66,9 +65,9 @@ func NewReinfReturn() *Reinf {
 	return &Reinf{}
 }
 
-func (returnReinf *Reinf) LoadXML(xml string) (*Reinf, error) {
+func (returnReinf *Reinf) LoadXML(in string) (*Reinf, error) {
 
-	if err := json.Unmarshal([]byte(xml), &returnReinf); err != nil {
+	if err := xml.Unmarshal([]byte(in), &returnReinf); err != nil {
 		return nil, errors.New("não foi possível converter o xml RetornoLoteEventosAssincrono para struct")
 	}
 
